@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <xacro:macro name="robot_dynamics" params="mu1 mu2">
-        <mu1 value="${mu1}" />
-        <mu2 value="${mu2}" />
+    <xacro:include filename="$(find ceerii_mobile_bot)/urdf/xacro/sensors.xacro"/>
+
+    <xacro:macro name="wheel_dynamics">
+        <mu1 value="200.0"/>
+        <mu2 value="100.0"/>
         <kp value="10000000.0" />
         <kd value="1.0" />
     </xacro:macro>
@@ -14,22 +16,23 @@
     </gazebo>
     <gazebo reference="head">
         <material>Gazebo/Red</material>
+        <xacro:laser_sensor />
     </gazebo>
-    <gazebo reference="right_front_wheel">
-        <xacro:robot_dynamics mu1="200" mu2="100" />
+    <gazebo reference="passive_wheel_holder">
         <material>Gazebo/Black</material>
     </gazebo>
-    <gazebo reference="right_back_wheel">
-        <xacro:robot_dynamics mu1="200" mu2="100" />
+    <gazebo reference="passive_wheel">
+        <mu1 value="0"/>
+        <mu2 value="0"/>
         <material>Gazebo/Black</material>
     </gazebo>
-    <gazebo reference="left_front_wheel">
-        <xacro:robot_dynamics mu1="200" mu2="100" />
+    <gazebo reference="left_wheel">
         <material>Gazebo/Black</material>
+        <xacro:wheel_dynamics />
     </gazebo>
-    <gazebo reference="left_back_wheel">
-        <xacro:robot_dynamics mu1="200" mu2="100" />
+    <gazebo reference="right_wheel">
         <material>Gazebo/Black</material>
+        <xacro:wheel_dynamics />
     </gazebo>
 
     <!-- General Gazebo Plugins -->

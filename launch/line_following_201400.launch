@@ -1,0 +1,22 @@
+<launch>
+    <arg name="init_pose" value="-x 0.2 -y 0.06 -z 0.1 -R 0 -P 0 -Y 0" />
+    <arg name="map_file" default="$(find ceerii_mobile_bot)/maps/world_line.yaml" />
+    <arg name="world_name" value="$(find ceerii_mobile_bot)/worlds/world_line.world" />
+    <arg name="rviz_config" default="$(find ceerii_mobile_bot)/config/ceeriibot.rviz" />
+    
+    <remap from="/robot_velocity_controller/cmd_vel" to="/keyboard_control/cmd_vel" />
+
+    <rosparam command="load" file="$(find ceerii_mobile_bot)/config/controllers.yaml"  />
+    <param name="robot_description" command="xacro '$(find ceerii_mobile_bot)/urdf/robot.xacro'" />
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="gui" value="true" />
+        <arg name="world_name" value="$(arg world_name)" />
+    </include>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_config)" />
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" args="joint_state_controller robot_velocity_controller" />
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" args="$(arg init_pose) -urdf -model ceeriibot -param robot_description" />
+</launch>

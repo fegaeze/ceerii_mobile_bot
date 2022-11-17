@@ -13,9 +13,8 @@
     <xacro:chasis />
 
     <!-- Robot Wheels -->
-    <xacro:wheel side="right" position="front" offset_x="${chasis_length/2 - 0.1}" offset_y="${-(chasis_width/2 + 0.05)}" />
-    <xacro:wheel side="left" position="front" offset_x="${chasis_length/2 - 0.1}" offset_y="${chasis_width/2 + 0.05}" />
-    <xacro:wheel side="right" position="back" offset_x="${-(chasis_length/2 - 0.1)}" offset_y="${-(chasis_width/2 + 0.05)}" />
-    <xacro:wheel side="left" position="back" offset_x="${-(chasis_length/2 - 0.1)}" offset_y="${chasis_width/2 + 0.05}" />
+    <xacro:wheel prefix="left" y_offset="${chasis_radius}" />
+    <xacro:wheel prefix="right" y_offset="${-(chasis_radius)}" />
+    <xacro:passive_wheel x_offset="0.065" z_offset="-0.02" />
 
 </robot>
