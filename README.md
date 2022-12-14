@@ -1,4 +1,4 @@
-# ceerii_mobile_bot
+# Ceerii Line-Following Bot
 
 <img src="data/task_description.png" width="500" />  
 
