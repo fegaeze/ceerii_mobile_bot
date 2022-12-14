@@ -1,7 +1,7 @@
 # ceerii_mobile_bot
 
 <div style="display:flex;width:100%;justify-content:center;">
-    <img src="data/task_description.png" width="500px" />     
+    <img src="data/task_description.png" style="max-width:300px;width:100%;" />     
 </div>
 
 <br />
